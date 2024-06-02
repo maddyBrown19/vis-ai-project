@@ -10,7 +10,6 @@ export const NUM_IMAGES = 100; // number of images to display
  * @returns 
  */
 export default function Dataset({data, predictions}) {
-    console.info('Dataset', data, predictions);
     if (!data) return <div> data loading... </div>;
     const examples = data.getTestData(NUM_IMAGES);
     let imgSRC = [];

@@ -10,7 +10,7 @@ import Train from './components/Train';
 function App() {
   const [data, setData] = useState(null);
   const [predictions, setPredictions] = useState(null);
-  const model = createConvModel();
+  const [model, setModel] = useState(createConvModel());
 
   useEffect(() => {
     loadData().then((data) => {
@@ -26,7 +26,7 @@ function App() {
       </header>
      <div className='Body'>
       <Dataset data={data} predictions={predictions} />
-      <Train model={model} data={data} setPredictions={setPredictions}/>
+      <Train model={model} data={data} setPredictions={setPredictions} setModel={setModel}/>
       </div>
     </div>
   );

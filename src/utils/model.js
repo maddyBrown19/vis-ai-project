@@ -113,7 +113,7 @@ export const createConvModel = () => {
           // ui.plotLoss(trainBatchCount, logs.loss, 'train');
           // ui.plotAccuracy(trainBatchCount, logs.acc, 'train');
           if (onIteration && batch % 10 === 0) {
-            onIteration('onBatchEnd', trainBatchCount, logs);
+            onIteration('onBatchEnd', trainBatchCount / totalNumBatches, logs);
           }
           await tf.nextFrame();
         },
