@@ -5,9 +5,10 @@ import { getURL } from '../utils/data';
 /**
  * @param {Object} props
  * @param {tf.Tensor} props.examples
+ * @param {tf.Tensor} props.predictions
  * @returns 
  */
-export default function Dataset({examples}) {
+export default function Dataset({examples, predictions}) {
     if (examples==null) return <div>'data loading...'</div>;
     let imgSRC = [];
     for (let i = 0; i < examples.xs.shape[0]; i++) {
@@ -16,13 +17,15 @@ export default function Dataset({examples}) {
         imgSRC.push(url);
     }
 
+    const labels = examples.labels.argMax(1).dataSync(); // ground truth labels
+
     return <div id="Dataset">
         <h2>Dataset</h2>
         {imgSRC.map((url, i) => { 
-            return < >
-                <img key={'img'+i} src={url} alt={`Example ${i}`} />
-                {/* <span key={'text'+i}>{examples.labels.argMax(1).dataSync()[i]}</span> */}
-            </>
+            return < figure key={i} style={{display: 'inline-block', position: 'relative', margin: '10px 5px'}}>
+                <img  src={url} alt={`Example ${i}`} />
+                <figcaption style={{position: 'absolute'}} >{predictions ? predictions.argMax(1).dataSync()[i] : null}</figcaption>
+            </figure>
         })}
     </div>
 }

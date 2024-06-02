@@ -2,7 +2,7 @@
 import { train } from '../utils/model'
 import React, { useState } from 'react';
 
-export default function Train({model, data}) {
+export default function Train({model, data, setPredictions}) {
     const [trainLogs, setTrainLogs] = useState([]);
     const [status, setStatus] = useState('Model Loaded');
 
@@ -20,6 +20,7 @@ export default function Train({model, data}) {
         setStatus('Training...');
         await train(model, data, onIteration);
         setStatus('Done!');
+        setPredictions(model.predict(data.getTestData(100).xs));
     }
 
     const Logs = trainLogs.length>0 ? <>
@@ -29,7 +30,7 @@ export default function Train({model, data}) {
         null
     
     return <div id="Train">
-        <h2>Mdoel Training</h2>
+        <h2>Model Training</h2>
         <button onClick={startTraining}>Click to Start Training</button>
         <div id='status'><b>Status:</b> {status}</div>
         {Logs}

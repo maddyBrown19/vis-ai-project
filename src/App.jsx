@@ -9,6 +9,7 @@ import Train from './components/Train';
 
 function App() {
   const [data, setData] = useState(null);
+  const [predictions, setPredictions] = useState(null);
   const model = createConvModel();
 
   useEffect(() => {
@@ -24,8 +25,8 @@ function App() {
         <h1>Visualization with AI</h1>
       </header>
      <div className='Body'>
-      <Dataset examples={data ? data.getTestData(100) : null} />
-      <Train model={model} data={data} />
+      <Dataset examples={data ? data.getTestData(100) : null} predictions={predictions} />
+      <Train model={model} data={data} setPredictions={setPredictions}/>
       </div>
     </div>
   );
