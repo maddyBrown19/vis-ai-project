@@ -1,6 +1,7 @@
 import React from 'react';
 import { getURL } from '../utils/data';
 
+export const NUM_IMAGES = 100; // number of images to display
 
 /**
  * @param {Object} props
@@ -8,8 +9,10 @@ import { getURL } from '../utils/data';
  * @param {tf.Tensor} props.predictions
  * @returns 
  */
-export default function Dataset({examples, predictions}) {
-    if (examples==null) return <div>'data loading...'</div>;
+export default function Dataset({data, predictions}) {
+    console.info('Dataset', data, predictions);
+    if (!data) return <div> data loading... </div>;
+    const examples = data.getTestData(NUM_IMAGES);
     let imgSRC = [];
     for (let i = 0; i < examples.xs.shape[0]; i++) {
         const image = examples.xs.slice([i, 0], [1, examples.xs.shape[1]]);

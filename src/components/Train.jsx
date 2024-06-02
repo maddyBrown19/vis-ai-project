@@ -1,6 +1,7 @@
 
 import { train } from '../utils/model'
 import React, { useState } from 'react';
+import { NUM_IMAGES } from './Dataset';
 
 export default function Train({model, data, setPredictions}) {
     const [trainLogs, setTrainLogs] = useState([]);
@@ -20,7 +21,7 @@ export default function Train({model, data, setPredictions}) {
         setStatus('Training...');
         await train(model, data, onIteration);
         setStatus('Done!');
-        setPredictions(model.predict(data.getTestData(100).xs));
+        setPredictions(model.predict(data.getTestData(NUM_IMAGES).xs));
     }
 
     const Logs = trainLogs.length>0 ? <>

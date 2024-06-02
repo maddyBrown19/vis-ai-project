@@ -25,7 +25,7 @@ function App() {
         <h1>Visualization with AI</h1>
       </header>
      <div className='Body'>
-      <Dataset examples={data ? data.getTestData(100) : null} predictions={predictions} />
+      <Dataset data={data} predictions={predictions} />
       <Train model={model} data={data} setPredictions={setPredictions}/>
       </div>
     </div>
